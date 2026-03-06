@@ -252,7 +252,7 @@
         <tr><td>codigo_* no listar</td><td>→</td><td>string (normalizar para int)</td></tr>
         <tr><td>Paginação POST</td><td>→</td><td>pagina + quantidade_por_pagina</td></tr>
         <tr><td>Token</td><td>→</td><td>expira · renovar via /autenticar</td></tr>
-        <tr><td>Volumes</td><td>→</td><td>62k assoc · 71k benef · 2.4k consult</td></tr>
+        <tr><td>Volumes Ativos</td><td>→</td><td>62k assoc · 71k benef · 75k veic · 2.4k consult</td></tr>
       </table>
     </div>
   </div>
@@ -319,7 +319,7 @@
       <div class="entity-meta">
         <span class="meta-pill">= Voluntário no SGA</span>
         <span class="meta-pill">GET /listar/voluntario/ativo</span>
-        <span class="meta-pill">2.422 registros</span>
+        <span class="meta-pill">2.422 registros ativos</span>
       </div>
     </div>
     <table class="fields-table">
@@ -432,6 +432,7 @@
       <div class="entity-meta">
         <span class="meta-pill">GET /veiculo/buscar/:placa/placa</span>
         <span class="meta-pill">embutido no Associado buscar</span>
+        <span class="meta-pill">75.110 registros ativos</span>
       </div>
     </div>
     <table class="fields-table">
@@ -510,6 +511,7 @@
         <span class="meta-pill">= Produto no SGA</span>
         <span class="meta-pill">GET /produto/buscar/:codigo</span>
         <span class="meta-pill">GET /listar/classificacao-produto/todos</span>
+        <span class="meta-pill">280 ativos · 564 total</span>
       </div>
     </div>
     <table class="fields-table">
@@ -601,6 +603,7 @@
       <div class="entity-meta">
         <span class="meta-pill">GET /listar/beneficio-beneficiario/:codigo_beneficiario</span>
         <span class="meta-pill">clube de vantagens · independente de Produto</span>
+        <span class="meta-pill">9 tipos no catálogo</span>
       </div>
     </div>
     <table class="fields-table">
@@ -633,7 +636,7 @@
     <div class="alerts">
       <div class="alerts-title">// Alertas ETL</div>
       <div class="alert-item alert-info">Benefício é independente de Produto — entidades distintas no SGA</div>
-      <div class="alert-item alert-warn">Não há endpoint de catálogo completo de benefícios (/listar/beneficio/* retorna 404)</div>
+      <div class="alert-item alert-ok">Catálogo de benefícios disponível via GET /listar/beneficio-por-situacao/todos — 9 tipos cadastrados</div>
       <div class="alert-item alert-info">ETL: percorrer todos os Beneficiários e chamar GET /listar/beneficio-beneficiario/:codigo para cada um</div>
     </div>
   </div>

@@ -1,0 +1,18 @@
+Task Name,List,Parent Task,Assignees,Priority,Status,Description
+Sprint 1 — Infraestrutura,Data Hub,,,urgent,To Do,
+Setup Postgres,Data Hub,Sprint 1 — Infraestrutura,kelvy.muniz@topbrasilpv.com.br,urgent,To Do,Banco de dados central · schemas · migrations base
+API Gateway — estrutura base,Data Hub,Sprint 1 — Infraestrutura,kelvy.muniz@topbrasilpv.com.br,urgent,To Do,Roteamento · middleware · config
+Autenticação,Data Hub,Sprint 1 — Infraestrutura,kelvy.muniz@topbrasilpv.com.br,urgent,To Do,JWT · refresh token · logout
+Perfis de acesso,Data Hub,Sprint 1 — Infraestrutura,kelvy.muniz@topbrasilpv.com.br,urgent,To Do,CRM · ERP · permissões por rota
+Sprint 2 — CRUDs Hierarquia,Data Hub,,,high,To Do,
+CRUD Empresa,Data Hub,Sprint 2 — CRUDs Hierarquia,kelvy.muniz@topbrasilpv.com.br,high,To Do,
+CRUD Regional / Cidade,Data Hub,Sprint 2 — CRUDs Hierarquia,kelvy.muniz@topbrasilpv.com.br,high,To Do,
+CRUD Equipe de Vendas,Data Hub,Sprint 2 — CRUDs Hierarquia,ricardo.oliveira@topbrasilpv.com.br,high,To Do,
+CRUD Tabela de Preço,Data Hub,Sprint 2 — CRUDs Hierarquia,kelvy.muniz@topbrasilpv.com.br,high,To Do,Estrutura de preço por regional
+Sprint 3 — CRUDs Comercial + Financeiro,Data Hub,,,high,To Do,
+CRUD Consultor,Data Hub,Sprint 3 — CRUDs Comercial + Financeiro,ricardo.oliveira@topbrasilpv.com.br,high,To Do,Inclui link consultor
+CRUD Associado,Data Hub,Sprint 3 — CRUDs Comercial + Financeiro,kelvy.muniz@topbrasilpv.com.br,high,To Do,
+CRUD Veículo / Plano / Serviço,Data Hub,Sprint 3 — CRUDs Comercial + Financeiro,kelvy.muniz@topbrasilpv.com.br,high,To Do,Vinculações e regras
+CRUD Beneficiário / Benefício,Data Hub,Sprint 3 — CRUDs Comercial + Financeiro,kelvy.muniz@topbrasilpv.com.br,normal,To Do,
+CRUD Boleto,Data Hub,Sprint 3 — CRUDs Comercial + Financeiro,kelvy.muniz@topbrasilpv.com.br,normal,To Do,Schema + endpoints
+Testes de integração entre entidades,Data Hub,Sprint 3 — CRUDs Comercial + Financeiro,kelvy.muniz@topbrasilpv.com.br,normal,To Do,Validar fluxo completo Empresa → Associado → Boleto

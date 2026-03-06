@@ -114,6 +114,7 @@ Consultor
 
 ## ENTIDADE: Veículo
 
+**Volume:** 75.110 registros ativos
 **Endpoint:** `GET /veiculo/buscar/:placa/placa`
 > Busca por placa funciona. Busca por `codigo_veiculo` direta retorna 404. Listagem por associado bloqueada para este token.
 > Veículos também vêm **embutidos** no `GET /associado/buscar` (campos resumidos).
@@ -204,6 +205,7 @@ Consultor
 
 ## ENTIDADE: Serviço (= Produto no SGA)
 
+**Volume:** 280 ativos · 564 total
 **Endpoints:**
 - `GET /produto/buscar/:codigo_produto` — registro individual
 - `GET /listar/classificacao-produto/todos` — categorias de produto
@@ -322,6 +324,7 @@ Consultor
 
 ## ENTIDADE: Benefício
 
+**Volume:** 9 tipos no catálogo (`GET /listar/beneficio-por-situacao/todos`)
 **Endpoint:** `GET /listar/beneficio-beneficiario/:codigo_beneficiario`
 
 > Benefício é uma entidade **separada de Produto** — hipótese anterior estava incorreta.
@@ -369,7 +372,7 @@ O endpoint retorna dados do Beneficiário + array `beneficios`:
 ### Alertas ETL
 
 - ℹ️ Benefício é **independente de Produto** — são entidades distintas no SGA
-- ⚠️ Não há endpoint de catálogo de benefícios disponíveis (`/listar/beneficio/*` retorna 404)
+- ✅ Catálogo disponível via `GET /listar/beneficio-por-situacao/todos` — 9 tipos cadastrados
 - ℹ️ Para ETL: percorrer todos os Beneficiários e chamar `GET /listar/beneficio-beneficiario/:codigo` para cada um
 
 ---
