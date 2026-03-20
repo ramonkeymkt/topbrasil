@@ -178,11 +178,14 @@
   .flow-number { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .5rem; }
   .flow-name { font-size: 1.05rem; font-weight: 700; margin-bottom: .35rem; }
   .flow-desc { font-size: .8rem; color: var(--text-muted); margin-bottom: .75rem; }
-  .flow-systems { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .flow-systems { display: flex; flex-wrap: wrap; gap: .4rem; }
   .flow-sys {
-    font-size: .7rem; padding: .15rem .5rem; border-radius: 4px;
-    background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted);
+    font-size: .72rem; padding: .2rem .55rem; border-radius: 5px;
+    background: var(--surface2); color: var(--text-muted);
   }
+  .flow-card.onda1 .flow-sys    { color: var(--accent); background: var(--blue-bg); }
+  .flow-card.paralela .flow-sys { color: var(--yellow); background: var(--yellow-bg); }
+  .flow-card.onda2 .flow-sys    { color: var(--purple); background: var(--purple-bg); }
   .flow-when { font-size: .75rem; color: var(--text-muted); margin-top: .75rem; padding-top: .5rem; border-top: 1px solid var(--border); }
 
   /* WAVE SECTIONS */
@@ -639,7 +642,6 @@
 <section id="ondas">
   <h2>Ondas de Entrega</h2>
 
-  <!-- ONDA 1 -->
   <div class="wave-section">
     <div class="wave-header">
       <div class="wave-badge" style="background:var(--blue-bg);color:var(--accent);">ONDA 1</div>
@@ -648,50 +650,15 @@
         <div class="wave-sub">Fluxos críticos. Sem eles, o ecossistema próprio não opera.</div>
       </div>
     </div>
-    <table class="tbl">
-      <thead><tr><th>Sistema</th><th>Legado</th><th>Estratégia</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>Data Hub</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
-          <td>—</td>
-          <td><span class="badge badge-green">🟢 Desenvolver próprio</span></td>
-          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
-        </tr>
-        <tr>
-          <td><strong>ERP</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
-          <td>SGA (Hinova)</td>
-          <td><span class="badge badge-red">🔴 Substituir</span></td>
-          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
-        </tr>
-        <tr>
-          <td><strong>CRM</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
-          <td>Power CRM (Hinova)</td>
-          <td><span class="badge badge-red">🔴 Substituir</span></td>
-          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
-        </tr>
-        <tr>
-          <td><strong>Vistoria</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Própria)</span></td>
-          <td>Visto (Hinova)</td>
-          <td><span class="badge badge-red">🔴 Substituir</span></td>
-          <td><span class="status-dot dot-prod"></span> Produção</td>
-        </tr>
-        <tr>
-          <td><strong>Gestão de Boletos</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
-          <td>—</td>
-          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
-          <td><span class="status-dot dot-prod"></span> Produção</td>
-        </tr>
-        <tr>
-          <td><strong>ETL</strong></td>
-          <td>—</td>
-          <td><span class="badge badge-green">🟢 Desenvolver próprio</span></td>
-          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
-        </tr>
-      </tbody>
-    </table>
+    <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem;">
+      <span class="badge badge-blue" style="font-size:.85rem;">Fluxo 1 — Núcleo de dados</span>
+      <span class="badge badge-blue" style="font-size:.85rem;">Fluxo 2 — Adesão do associado</span>
+      <span class="badge badge-blue" style="font-size:.85rem;">Fluxo 3 — Cobrança</span>
+      <span class="badge badge-blue" style="font-size:.85rem;">Fluxo 4 — Gestão administrativa</span>
+    </div>
+    <p style="color:var(--text-muted);font-size:.85rem;margin-top:.6rem;">6 sistemas · Data Hub, ERP, CRM, Vistoria, Boletos, ETL</p>
   </div>
 
-  <!-- LANES PARALELAS -->
   <div class="wave-section">
     <div class="wave-header">
       <div class="wave-badge" style="background:var(--yellow-bg);color:var(--yellow);">PARALELAS</div>
@@ -700,49 +667,15 @@
         <div class="wave-sub">Máximo 20% da capacidade. Se a Onda 1 estiver em risco, pausam.</div>
       </div>
     </div>
-    <table class="tbl">
-      <thead><tr><th>Sistema</th><th>Legado</th><th>Estratégia</th><th>Status</th><th>Deadline</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>SANKHYA</strong></td>
-          <td>MGF</td>
-          <td><span class="badge badge-blue">🔵 Terceiro contratado</span></td>
-          <td><span class="status-dot dot-impl"></span> Implantação</td>
-          <td>Abr 2026</td>
-        </tr>
-        <tr>
-          <td><strong>Gestão de Rastreadores</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
-          <td>SGR (Hinova)</td>
-          <td><span class="badge badge-red">🔴 Substituir</span></td>
-          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
-          <td>Abr 2026</td>
-        </tr>
-        <tr>
-          <td><strong>Lógica</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
-          <td>—</td>
-          <td><span class="badge badge-gray">⚪ Manter integrado</span></td>
-          <td>—</td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td><strong>Atend. Automatizado</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
-          <td>—</td>
-          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
-          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
-          <td>Abr 2026 (MVP)</td>
-        </tr>
-        <tr>
-          <td><strong>App Associado</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
-          <td>—</td>
-          <td><span class="badge badge-green">🟢 Desenvolver próprio</span></td>
-          <td><span class="status-dot dot-prod"></span> Produção</td>
-          <td>Abr 2026</td>
-        </tr>
-      </tbody>
-    </table>
+    <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem;">
+      <span class="badge badge-yellow" style="font-size:.85rem;">Fluxo 5 — Gestão financeira</span>
+      <span class="badge badge-yellow" style="font-size:.85rem;">Fluxo 6 — Rastreamento</span>
+      <span class="badge badge-yellow" style="font-size:.85rem;">Fluxo 7 — Atendimento</span>
+      <span class="badge badge-yellow" style="font-size:.85rem;">Fluxo 8 — App do Associado</span>
+    </div>
+    <p style="color:var(--text-muted);font-size:.85rem;margin-top:.6rem;">6 sistemas · SANKHYA, Gestão de Rastreadores, Lógica, Atend. Automatizado, App Associado, ezchat</p>
   </div>
 
-  <!-- ONDA 2 -->
   <div class="wave-section">
     <div class="wave-header">
       <div class="wave-badge" style="background:var(--purple-bg);color:var(--purple);">ONDA 2</div>
@@ -751,29 +684,10 @@
         <div class="wave-sub">Só começam após o go-live de Maio, salvo trade-off com a diretoria ou metas superadas.</div>
       </div>
     </div>
-    <table class="tbl">
-      <thead><tr><th>Sistema</th><th>Legado</th><th>Estratégia</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>Workflow de Eventos</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
-          <td>SIGA (Arco)</td>
-          <td><span class="badge badge-red">🔴 Substituir</span></td>
-          <td><span class="status-dot dot-wait"></span> Aguardando</td>
-        </tr>
-        <tr>
-          <td><strong>Abertura de Eventos</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
-          <td>—</td>
-          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
-          <td><span class="status-dot dot-prod"></span> Produção</td>
-        </tr>
-        <tr>
-          <td><strong>Cilia</strong></td>
-          <td>—</td>
-          <td><span class="badge badge-gray">⚪ Manter integrado</span></td>
-          <td>—</td>
-        </tr>
-      </tbody>
-    </table>
+    <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem;">
+      <span class="badge badge-purple" style="font-size:.85rem;">Fluxo 9 — Eventos</span>
+    </div>
+    <p style="color:var(--text-muted);font-size:.85rem;margin-top:.6rem;">3 sistemas · Workflow de Eventos, Abertura de Eventos, Cilia</p>
   </div>
 </section>
 
