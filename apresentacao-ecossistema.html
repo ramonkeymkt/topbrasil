@@ -128,7 +128,8 @@
   }
 
   /* TABLE */
-  .tbl { width: 100%; border-collapse: collapse; font-size: .85rem; }
+  .tbl-wrap { overflow-x: auto; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: .85rem; min-width: 600px; }
   .tbl th { text-align: left; padding: .6rem .75rem; color: var(--text-muted); font-weight: 600; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid var(--border); }
   .tbl td { padding: .6rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
   .tbl tr:last-child td { border-bottom: none; }
@@ -308,89 +309,12 @@
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    /* Nav */
-    nav { padding: 0 .75rem; gap: .5rem; height: 48px; }
-    nav .logo { font-size: .85rem; }
-    nav .nav-links { gap: .1rem; }
-    nav .nav-links a { font-size: .7rem; padding: .3rem .5rem; }
-    main { margin-top: 48px; }
-
-    /* Sections */
-    section { padding: 1.5rem .75rem; }
-    h1 { font-size: 1.6rem; }
-    h2 { font-size: 1.2rem; margin-bottom: 1rem; }
-    h3 { font-size: 1rem; }
-    .subtitle { font-size: .85rem; margin-bottom: 1.25rem; }
-
-    /* Hero */
-    .hero { padding: 3rem 1rem 2rem; }
+    nav { padding: 0 1rem; gap: 1rem; }
+    section { padding: 2rem 1rem; }
     .hero h1 { font-size: 1.8rem; }
-    .hero .subtitle { font-size: .95rem; }
-    .hero-stats { gap: 1.5rem; }
-    .hero-stat .number { font-size: 1.5rem; }
-
-    /* Cards */
     .card-grid, .flow-grid { grid-template-columns: 1fr; }
-
-    /* Layers (Mapa) */
-    .layer { padding: 1rem; }
-    .tbl { font-size: .75rem; }
-    .tbl th, .tbl td { padding: .4rem .5rem; }
-    /* Esconder textos de estratégia no mobile */
-    .hide-mobile { display: none; }
-    /* Esconder coluna Status inteira */
-    .tbl th:last-child, .tbl td:last-child { display: none; }
-
-    /* Flow cards */
-    .flow-card { padding: 1rem; }
-    .flow-name { font-size: .95rem; }
-    .flow-desc { font-size: .75rem; }
-
-    /* Waves */
-    .wave-header { flex-direction: column; align-items: flex-start; gap: .5rem; }
-    .wave-title { font-size: 1rem; }
-
-    /* Milestones */
-    .milestone { padding: 1rem; }
-    .milestone-items { grid-template-columns: 1fr; }
-    .milestone-header { flex-wrap: wrap; }
-
-    /* Team */
-    .team-grid { grid-template-columns: repeat(2, 1fr); gap: .5rem; }
-    .team-card { padding: .75rem; }
-    .team-avatar { width: 40px; height: 40px; font-size: .95rem; }
-
-    /* Blockers */
-    .blocker { flex-direction: column; gap: .5rem; padding: .75rem; }
-
-    /* Go-live */
-    .golive-grid { grid-template-columns: 1fr; }
-    .golive-item { font-size: .8rem; padding: .6rem .75rem; }
-
-    /* Gantt */
-    .gantt { min-width: 600px; grid-template-columns: 120px repeat(6, 1fr); font-size: .7rem; }
-    .gantt-row-label { padding: .4rem .3rem; font-size: .7rem; }
-    .gantt-bar { height: 20px; font-size: .55rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .gantt-month { font-size: .65rem; padding: .4rem .2rem; }
-    .gantt-separator { font-size: .6rem; padding: .4rem; }
-
-    /* Golden rule */
-    .golden-rule { padding: 1rem 1.25rem; }
-    .golden-rule p { font-size: .85rem; }
-    .golden-rule .sub { font-size: .75rem; }
-
-    /* Legend */
-    .legend { gap: .5rem; }
-    .legend-item { font-size: .7rem; }
-  }
-
-  /* Small phones */
-  @media (max-width: 400px) {
-    nav .nav-links a { font-size: .6rem; padding: .25rem .35rem; }
-    .hero h1 { font-size: 1.4rem; }
-    .team-grid { grid-template-columns: 1fr; }
-    .gantt { min-width: 500px; grid-template-columns: 90px repeat(6, 1fr); }
-    .gantt-row-label { font-size: .6rem; }
+    .hero-stats { gap: 1.5rem; }
+    .gantt-bar { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   }
 </style>
 </head>
@@ -457,16 +381,16 @@
         <span style="font-size:.8rem;color:var(--text-muted);">Interface direta com o associado</span>
       </div>
     </div>
-    <table class="tbl">
+    <div class="tbl-wrap"><table class="tbl">
       <thead><tr><th>Sistema</th><th>Estratégia</th><th>Status</th></tr></thead>
       <tbody>
         <tr>
           <td><strong>App Associado</strong> <span style="color:var(--text-muted);font-size:.8rem;">Próprio</span></td>
-          <td><span class="badge badge-green">🟢<span class="hide-mobile"> Desenvolver próprio</span></span></td>
-          <td><span class="status-dot dot-prod"></span><span class="hide-mobile"> Produção</span></td>
+          <td><span class="badge badge-green">🟢 Desenvolver próprio</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
         </tr>
       </tbody>
-    </table>
+    </table></div>
   </div>
 
   <!-- CAMADA 2 -->
@@ -478,88 +402,88 @@
         <span style="font-size:.8rem;color:var(--text-muted);">Sistemas que sustentam a operação diária</span>
       </div>
     </div>
-    <table class="tbl">
+    <div class="tbl-wrap"><table class="tbl">
       <thead><tr><th>Setor</th><th>Legado</th><th>→ Novo</th><th>Estratégia</th><th>Status</th></tr></thead>
       <tbody>
         <tr>
           <td rowspan="2"><strong>Comercial</strong></td>
           <td>Power CRM <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
           <td>CRM Próprio</td>
-          <td><span class="badge badge-red">🔴<span class="hide-mobile"> Substituir</span></span></td>
-          <td><span class="status-dot dot-dev"></span><span class="hide-mobile"> Desenvolvimento</span></td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
         </tr>
         <tr>
           <td>Visto <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
           <td>Vistoria Própria</td>
-          <td><span class="badge badge-red">🔴<span class="hide-mobile"> Substituir</span></span></td>
-          <td><span class="status-dot dot-prod"></span><span class="hide-mobile"> Produção</span></td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
         </tr>
         <tr>
           <td rowspan="2"><strong>Financeiro</strong></td>
           <td>Gestão de Boletos <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
           <td>Módulo do ecossistema</td>
-          <td><span class="badge badge-yellow">🟡<span class="hide-mobile"> Gargalo → módulo</span></span></td>
-          <td><span class="status-dot dot-prod"></span><span class="hide-mobile"> Produção</span></td>
+          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
         </tr>
         <tr>
           <td>MGF</td>
           <td>SANKHYA</td>
-          <td><span class="badge badge-blue">🔵<span class="hide-mobile"> Terceiro contratado</span></span></td>
-          <td><span class="status-dot dot-impl"></span><span class="hide-mobile"> Implantação</span></td>
+          <td><span class="badge badge-blue">🔵 Terceiro contratado</span></td>
+          <td><span class="status-dot dot-impl"></span> Implantação</td>
         </tr>
         <tr>
           <td rowspan="3"><strong>Eventos</strong></td>
           <td>Abertura de Eventos <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
           <td>Módulo do ecossistema</td>
-          <td><span class="badge badge-yellow">🟡<span class="hide-mobile"> Gargalo → módulo</span></span></td>
-          <td><span class="status-dot dot-prod"></span><span class="hide-mobile"> Produção</span></td>
+          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
         </tr>
         <tr>
           <td>SIGA <span style="color:var(--text-muted);font-size:.75rem;">(Arco)</span></td>
           <td>Workflow próprio</td>
-          <td><span class="badge badge-red">🔴<span class="hide-mobile"> Substituir</span></span></td>
-          <td><span class="status-dot dot-wait"></span><span class="hide-mobile"> Aguardando</span></td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-wait"></span> Aguardando</td>
         </tr>
         <tr>
           <td>Cilia</td>
           <td>—</td>
-          <td><span class="badge badge-gray">⚪<span class="hide-mobile"> Manter integrado</span></span></td>
+          <td><span class="badge badge-gray">⚪ Manter integrado</span></td>
           <td>—</td>
         </tr>
         <tr>
           <td rowspan="2"><strong>Rastreamento</strong></td>
           <td>SGR <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
           <td>Gestão de Rastreadores</td>
-          <td><span class="badge badge-red">🔴<span class="hide-mobile"> Substituir</span></span></td>
-          <td><span class="status-dot dot-dev"></span><span class="hide-mobile"> Desenvolvimento</span></td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
         </tr>
         <tr>
           <td>Lógica <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
           <td>—</td>
-          <td><span class="badge badge-gray">⚪<span class="hide-mobile"> Manter integrado</span></span></td>
+          <td><span class="badge badge-gray">⚪ Manter integrado</span></td>
           <td>—</td>
         </tr>
         <tr>
           <td rowspan="3"><strong>Atendimento</strong></td>
           <td>ezchat <span style="color:var(--text-muted);font-size:.75rem;">(ezchat)</span></td>
           <td>A definir</td>
-          <td><span class="badge badge-orange">⏳<span class="hide-mobile"> Substituir futuro</span></span></td>
+          <td><span class="badge badge-orange">⏳ Substituir futuro</span></td>
           <td>—</td>
         </tr>
         <tr>
           <td>WebAssist</td>
           <td>—</td>
-          <td><span class="badge badge-gray">⚪<span class="hide-mobile"> Manter integrado</span></span></td>
+          <td><span class="badge badge-gray">⚪ Manter integrado</span></td>
           <td>—</td>
         </tr>
         <tr>
           <td>Atendimento Automatizado <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
           <td>Módulo do ecossistema</td>
-          <td><span class="badge badge-yellow">🟡<span class="hide-mobile"> Gargalo → módulo</span></span></td>
-          <td><span class="status-dot dot-dev"></span><span class="hide-mobile"> Desenvolvimento</span></td>
+          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
         </tr>
       </tbody>
-    </table>
+    </table></div>
   </div>
 
   <!-- CAMADA 1 -->
@@ -571,23 +495,23 @@
         <span style="font-size:.8rem;color:var(--text-muted);">Fonte única de verdade do ecossistema</span>
       </div>
     </div>
-    <table class="tbl">
+    <div class="tbl-wrap"><table class="tbl">
       <thead><tr><th>Legado</th><th>→ Novo</th><th>Estratégia</th><th>Status</th></tr></thead>
       <tbody>
         <tr>
           <td>—</td>
           <td><strong>Data Hub</strong> <span style="color:var(--text-muted);font-size:.75rem;">Próprio</span></td>
-          <td><span class="badge badge-green">🟢<span class="hide-mobile"> Desenvolver próprio</span></span></td>
-          <td><span class="status-dot dot-dev"></span><span class="hide-mobile"> Desenvolvimento</span></td>
+          <td><span class="badge badge-green">🟢 Desenvolver próprio</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
         </tr>
         <tr>
           <td>SGA <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
           <td><strong>ERP</strong> <span style="color:var(--text-muted);font-size:.75rem;">Próprio</span></td>
-          <td><span class="badge badge-red">🔴<span class="hide-mobile"> Substituir por próprio</span></span></td>
-          <td><span class="status-dot dot-dev"></span><span class="hide-mobile"> Desenvolvimento</span></td>
+          <td><span class="badge badge-red">🔴 Substituir por próprio</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
         </tr>
       </tbody>
-    </table>
+    </table></div>
   </div>
 </section>
 
