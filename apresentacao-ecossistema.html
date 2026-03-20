@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecossistema — Top Brasil Proteção Veicular</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #242836;
+    --border: #2e3347;
+    --text: #e4e6f0;
+    --text-muted: #8b8fa8;
+    --accent: #6c8cff;
+    --accent-dim: #4a6ae0;
+    --red: #ff6b6b;
+    --red-bg: rgba(255,107,107,.12);
+    --green: #51cf66;
+    --green-bg: rgba(81,207,102,.12);
+    --yellow: #ffd43b;
+    --yellow-bg: rgba(255,212,59,.12);
+    --blue: #6c8cff;
+    --blue-bg: rgba(108,140,255,.12);
+    --gray: #8b8fa8;
+    --gray-bg: rgba(139,143,168,.12);
+    --orange: #ff922b;
+    --orange-bg: rgba(255,146,43,.12);
+    --purple: #b197fc;
+    --purple-bg: rgba(177,151,252,.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,17,23,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 2rem; height: 56px;
+  }
+  nav .logo { font-weight: 700; font-size: 1rem; color: var(--accent); white-space: nowrap; }
+  nav .nav-links { display: flex; gap: .25rem; overflow-x: auto; }
+  nav .nav-links a {
+    color: var(--text-muted); text-decoration: none; font-size: .8rem; padding: .4rem .7rem;
+    border-radius: 6px; white-space: nowrap; transition: all .2s;
+  }
+  nav .nav-links a:hover, nav .nav-links a.active { color: var(--text); background: var(--surface2); }
+
+  main { margin-top: 56px; }
+
+  /* SECTIONS */
+  section { padding: 3rem 2rem; max-width: 1280px; margin: 0 auto; }
+  section + section { border-top: 1px solid var(--border); }
+
+  h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: .5rem; }
+  h1 span { color: var(--accent); }
+  h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+  h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
+  .subtitle { color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; }
+
+  /* HERO */
+  .hero { text-align: center; padding: 5rem 2rem 3rem; }
+  .hero h1 { font-size: 2.8rem; }
+  .hero .subtitle { font-size: 1.15rem; }
+  .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; }
+  .hero-stat { text-align: center; }
+  .hero-stat .number { font-size: 2rem; font-weight: 800; color: var(--accent); }
+  .hero-stat .label { font-size: .8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.25rem; transition: border-color .2s;
+  }
+  .card:hover { border-color: var(--accent-dim); }
+  .card-header { display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; }
+  .card-icon {
+    width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .card-title { font-weight: 600; font-size: .95rem; }
+  .card-subtitle { font-size: .75rem; color: var(--text-muted); }
+  .card-body { font-size: .85rem; color: var(--text-muted); }
+  .card-body p + p { margin-top: .5rem; }
+
+  /* BADGES */
+  .badge {
+    display: inline-flex; align-items: center; gap: .3rem;
+    padding: .2rem .6rem; border-radius: 20px; font-size: .7rem; font-weight: 600;
+  }
+  .badge-red { background: var(--red-bg); color: var(--red); }
+  .badge-green { background: var(--green-bg); color: var(--green); }
+  .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+  .badge-blue { background: var(--blue-bg); color: var(--blue); }
+  .badge-gray { background: var(--gray-bg); color: var(--gray); }
+  .badge-orange { background: var(--orange-bg); color: var(--orange); }
+  .badge-purple { background: var(--purple-bg); color: var(--purple); }
+
+  /* STATUS DOT */
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .dot-prod { background: var(--green); }
+  .dot-dev { background: var(--yellow); }
+  .dot-impl { background: var(--blue); }
+  .dot-wait { background: var(--gray); }
+
+  /* LAYERS */
+  .layer {
+    border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;
+    background: var(--surface);
+  }
+  .layer-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+  .layer-number {
+    width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .85rem; flex-shrink: 0;
+  }
+
+  /* TABLE */
+  .tbl { width: 100%; border-collapse: collapse; font-size: .85rem; }
+  .tbl th { text-align: left; padding: .6rem .75rem; color: var(--text-muted); font-weight: 600; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid var(--border); }
+  .tbl td { padding: .6rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(108,140,255,.04); }
+
+  /* TIMELINE */
+  .timeline-container { overflow-x: auto; padding-bottom: 1rem; }
+  .timeline {
+    display: grid;
+    grid-template-columns: 140px repeat(6, 1fr);
+    gap: 0;
+    min-width: 900px;
+  }
+  .tl-header {
+    padding: .6rem .75rem; font-size: .75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--text-muted); border-bottom: 2px solid var(--border);
+    text-align: center;
+  }
+  .tl-header:first-child { text-align: left; }
+  .tl-label {
+    padding: .75rem; font-size: .8rem; font-weight: 600; display: flex; align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .tl-cell {
+    padding: .5rem .25rem; border-bottom: 1px solid var(--border);
+    border-left: 1px solid var(--border); position: relative;
+  }
+  .tl-bar {
+    height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    font-size: .65rem; font-weight: 600; color: #fff; white-space: nowrap; padding: 0 .5rem;
+  }
+  .tl-bar.span-2 { position: absolute; left: .25rem; right: .25rem; }
+
+  /* FLOW CARDS */
+  .flow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  .flow-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.25rem; position: relative; overflow: hidden; transition: border-color .2s;
+  }
+  .flow-card:hover { border-color: var(--accent-dim); }
+  .flow-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .flow-card.onda1::before { background: var(--accent); }
+  .flow-card.paralela::before { background: var(--yellow); }
+  .flow-card.onda2::before { background: var(--purple); }
+  .flow-number { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .5rem; }
+  .flow-name { font-size: 1.05rem; font-weight: 700; margin-bottom: .35rem; }
+  .flow-desc { font-size: .8rem; color: var(--text-muted); margin-bottom: .75rem; }
+  .flow-systems { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .flow-sys {
+    font-size: .7rem; padding: .15rem .5rem; border-radius: 4px;
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted);
+  }
+  .flow-when { font-size: .75rem; color: var(--text-muted); margin-top: .75rem; padding-top: .5rem; border-top: 1px solid var(--border); }
+
+  /* WAVE SECTIONS */
+  .wave-section { margin-bottom: 2.5rem; }
+  .wave-header {
+    display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem;
+    padding-bottom: .75rem; border-bottom: 2px solid var(--border);
+  }
+  .wave-badge {
+    padding: .35rem .9rem; border-radius: 20px; font-weight: 700; font-size: .8rem;
+  }
+  .wave-title { font-size: 1.15rem; font-weight: 700; }
+  .wave-sub { font-size: .8rem; color: var(--text-muted); }
+
+  /* MILESTONE */
+  .milestone {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.5rem; margin-bottom: 1rem;
+  }
+  .milestone-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+  .milestone-month {
+    padding: .3rem .75rem; border-radius: 6px; font-weight: 700; font-size: .85rem;
+  }
+  .milestone-title { font-weight: 600; font-size: 1rem; }
+  .milestone-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .5rem; }
+  .milestone-item {
+    font-size: .8rem; padding: .5rem .75rem; border-radius: 6px;
+    background: var(--surface2); display: flex; align-items: flex-start; gap: .5rem;
+  }
+  .milestone-item .check { color: var(--text-muted); flex-shrink: 0; }
+
+  /* TEAM */
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .75rem; }
+  .team-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 1rem; text-align: center;
+  }
+  .team-avatar {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--surface2);
+    display: flex; align-items: center; justify-content: center; margin: 0 auto .5rem;
+    font-weight: 700; font-size: 1.1rem; color: var(--accent);
+  }
+  .team-name { font-weight: 600; font-size: .9rem; }
+  .team-role { font-size: .75rem; color: var(--text-muted); }
+
+  /* BLOCKER */
+  .blocker-list { display: flex; flex-direction: column; gap: .5rem; }
+  .blocker {
+    display: flex; align-items: flex-start; gap: .75rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 1rem;
+  }
+  .blocker-icon {
+    width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: .85rem; flex-shrink: 0; background: var(--red-bg); color: var(--red);
+  }
+  .blocker-title { font-weight: 600; font-size: .85rem; }
+  .blocker-desc { font-size: .8rem; color: var(--text-muted); }
+
+  /* GO-LIVE */
+  .golive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: .5rem; }
+  .golive-item {
+    display: flex; align-items: center; gap: .6rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: .75rem 1rem; font-size: .85rem;
+  }
+  .golive-check {
+    width: 20px; height: 20px; border-radius: 4px; border: 2px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  /* LEGEND */
+  .legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+  .legend-item { display: flex; align-items: center; gap: .4rem; font-size: .8rem; color: var(--text-muted); }
+
+  /* GANTT */
+  .gantt-wrap { overflow-x: auto; }
+  .gantt {
+    min-width: 800px;
+    display: grid;
+    grid-template-columns: 200px repeat(6, 1fr);
+    font-size: .8rem;
+  }
+  .gantt-month {
+    padding: .5rem; text-align: center; font-weight: 700; font-size: .75rem;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em;
+    border-bottom: 2px solid var(--accent);
+  }
+  .gantt-month:first-child { text-align: left; border-bottom-color: var(--border); }
+  .gantt-row-label {
+    padding: .6rem .5rem; font-weight: 600; display: flex; align-items: center; gap: .4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .gantt-cell {
+    padding: .4rem .15rem; border-bottom: 1px solid var(--border); border-left: 1px dashed rgba(46,51,71,.6);
+    display: flex; align-items: center;
+  }
+  .gantt-bar {
+    width: 100%; height: 24px; border-radius: 5px; display: flex; align-items: center;
+    justify-content: center; font-size: .65rem; font-weight: 600; color: #fff;
+  }
+  .gantt-bar-empty { background: transparent; }
+
+  /* SEPARATOR */
+  .gantt-separator {
+    grid-column: 1 / -1;
+    padding: .5rem; font-size: .7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--text-muted); border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  /* RULE */
+  .golden-rule {
+    background: linear-gradient(135deg, rgba(108,140,255,.1), rgba(177,151,252,.1));
+    border: 1px solid var(--accent-dim); border-radius: 12px;
+    padding: 1.5rem 2rem; text-align: center; margin-top: 2rem;
+  }
+  .golden-rule p { font-size: 1rem; font-weight: 600; }
+  .golden-rule .sub { font-size: .85rem; color: var(--text-muted); font-weight: 400; margin-top: .35rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; gap: 1rem; }
+    section { padding: 2rem 1rem; }
+    .hero h1 { font-size: 1.8rem; }
+    .card-grid, .flow-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">TOP BRASIL</div>
+  <div class="nav-links">
+    <a href="#mapa" class="active">Mapa</a>
+    <a href="#fluxos">Fluxos</a>
+    <a href="#ondas">Ondas</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#marcos">Marcos</a>
+    <a href="#golive">Go-live</a>
+    <a href="#riscos">Riscos</a>
+    <a href="#equipe">Equipe</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <h1>Ecossistema <span>Top Brasil</span></h1>
+  <p class="subtitle">Proteção Veicular — Roadmap de Transformação Digital</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="number">16</div>
+      <div class="label">Sistemas mapeados</div>
+    </div>
+    <div class="hero-stat">
+      <div class="number">9</div>
+      <div class="label">Fluxos de negócio</div>
+    </div>
+    <div class="hero-stat">
+      <div class="number">3</div>
+      <div class="label">Ondas de entrega</div>
+    </div>
+    <div class="hero-stat">
+      <div class="number">Mai 2026</div>
+      <div class="label">Go-live Onda 1</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA DO ECOSSISTEMA -->
+<section id="mapa">
+  <h2>Mapa do Ecossistema</h2>
+  <div class="legend">
+    <div class="legend-item"><span class="badge badge-red">🔴</span> Substituir por próprio</div>
+    <div class="legend-item"><span class="badge badge-green">🟢</span> Desenvolver próprio</div>
+    <div class="legend-item"><span class="badge badge-yellow">🟡</span> Gargalo → módulo</div>
+    <div class="legend-item"><span class="badge badge-blue">🔵</span> Terceiro contratado</div>
+    <div class="legend-item"><span class="badge badge-gray">⚪</span> Manter integrado</div>
+    <div class="legend-item"><span class="badge badge-orange">⏳</span> Substituir futuramente</div>
+  </div>
+
+  <!-- CAMADA 3 -->
+  <div class="layer">
+    <div class="layer-header">
+      <div class="layer-number" style="background:var(--green-bg);color:var(--green);">3</div>
+      <div>
+        <h3 style="margin-bottom:0;">Camada 3 — Experiência</h3>
+        <span style="font-size:.8rem;color:var(--text-muted);">Interface direta com o associado</span>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Sistema</th><th>Estratégia</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>App Associado</strong> <span style="color:var(--text-muted);font-size:.8rem;">Próprio</span></td>
+          <td><span class="badge badge-green">🟢 Desenvolver próprio</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CAMADA 2 -->
+  <div class="layer">
+    <div class="layer-header">
+      <div class="layer-number" style="background:var(--yellow-bg);color:var(--yellow);">2</div>
+      <div>
+        <h3 style="margin-bottom:0;">Camada 2 — Operacional</h3>
+        <span style="font-size:.8rem;color:var(--text-muted);">Sistemas que sustentam a operação diária</span>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Setor</th><th>Legado</th><th>→ Novo</th><th>Estratégia</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td rowspan="2"><strong>Comercial</strong></td>
+          <td>Power CRM <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
+          <td>CRM Próprio</td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+        </tr>
+        <tr>
+          <td>Visto <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
+          <td>Vistoria Própria</td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
+        </tr>
+        <tr>
+          <td rowspan="2"><strong>Financeiro</strong></td>
+          <td>Gestão de Boletos <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>Módulo do ecossistema</td>
+          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
+        </tr>
+        <tr>
+          <td>MGF</td>
+          <td>SANKHYA</td>
+          <td><span class="badge badge-blue">🔵 Terceiro contratado</span></td>
+          <td><span class="status-dot dot-impl"></span> Implantação</td>
+        </tr>
+        <tr>
+          <td rowspan="3"><strong>Eventos</strong></td>
+          <td>Abertura de Eventos <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>Módulo do ecossistema</td>
+          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
+        </tr>
+        <tr>
+          <td>SIGA <span style="color:var(--text-muted);font-size:.75rem;">(Arco)</span></td>
+          <td>Workflow próprio</td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-wait"></span> Aguardando</td>
+        </tr>
+        <tr>
+          <td>Cilia</td>
+          <td>—</td>
+          <td><span class="badge badge-gray">⚪ Manter integrado</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td rowspan="2"><strong>Rastreamento</strong></td>
+          <td>SGR <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
+          <td>Gestão de Rastreadores</td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+        </tr>
+        <tr>
+          <td>Lógica <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
+          <td>—</td>
+          <td><span class="badge badge-gray">⚪ Manter integrado</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td rowspan="3"><strong>Atendimento</strong></td>
+          <td>ezchat <span style="color:var(--text-muted);font-size:.75rem;">(ezchat)</span></td>
+          <td>A definir</td>
+          <td><span class="badge badge-orange">⏳ Substituir futuro</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>WebAssist</td>
+          <td>—</td>
+          <td><span class="badge badge-gray">⚪ Manter integrado</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Atendimento Automatizado <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>Módulo do ecossistema</td>
+          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CAMADA 1 -->
+  <div class="layer">
+    <div class="layer-header">
+      <div class="layer-number" style="background:var(--blue-bg);color:var(--blue);">1</div>
+      <div>
+        <h3 style="margin-bottom:0;">Camada 1 — Núcleo de Dados</h3>
+        <span style="font-size:.8rem;color:var(--text-muted);">Fonte única de verdade do ecossistema</span>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Legado</th><th>→ Novo</th><th>Estratégia</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>—</td>
+          <td><strong>Data Hub</strong> <span style="color:var(--text-muted);font-size:.75rem;">Próprio</span></td>
+          <td><span class="badge badge-green">🟢 Desenvolver próprio</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+        </tr>
+        <tr>
+          <td>SGA <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
+          <td><strong>ERP</strong> <span style="color:var(--text-muted);font-size:.75rem;">Próprio</span></td>
+          <td><span class="badge badge-red">🔴 Substituir por próprio</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FLUXOS DE NEGÓCIO -->
+<section id="fluxos">
+  <h2>Fluxos de Negócio</h2>
+  <p class="subtitle">O time ataca o ecossistema por fluxos de negócio, não por sistema. Cada fluxo entrega valor de ponta a ponta.</p>
+
+  <div class="flow-grid">
+    <!-- Fluxo 1 -->
+    <div class="flow-card onda1">
+      <div class="flow-number" style="color:var(--accent);">Fluxo 1 · Onda 1</div>
+      <div class="flow-name">Núcleo de dados</div>
+      <div class="flow-desc">70k+ associados saem do SGA e entram no Data Hub. Sync contínuo para reduzir dependência do SGA instável.</div>
+      <div class="flow-systems">
+        <span class="flow-sys">Data Hub</span>
+        <span class="flow-sys">ETL</span>
+        <span class="flow-sys">SGA</span>
+      </div>
+      <div class="flow-when">Mar → Mai</div>
+    </div>
+
+    <!-- Fluxo 2 -->
+    <div class="flow-card onda1">
+      <div class="flow-number" style="color:var(--accent);">Fluxo 2 · Onda 1</div>
+      <div class="flow-name">Adesão do associado</div>
+      <div class="flow-desc">Consultor vende → associado faz vistoria → entra na base.</div>
+      <div class="flow-systems">
+        <span class="flow-sys">Data Hub</span>
+        <span class="flow-sys">CRM</span>
+        <span class="flow-sys">Vistoria</span>
+        <span class="flow-sys">ERP</span>
+      </div>
+      <div class="flow-when">Mar → Abr</div>
+    </div>
+
+    <!-- Fluxo 3 -->
+    <div class="flow-card onda1">
+      <div class="flow-number" style="color:var(--accent);">Fluxo 3 · Onda 1</div>
+      <div class="flow-name">Cobrança</div>
+      <div class="flow-desc">Associado contrata → boleto é gerado → associado paga. Inadimplência gera suspensão → revistoria.</div>
+      <div class="flow-systems">
+        <span class="flow-sys">Data Hub</span>
+        <span class="flow-sys">Boletos</span>
+        <span class="flow-sys">Vistoria</span>
+        <span class="flow-sys">ERP</span>
+      </div>
+      <div class="flow-when">Mar → Abr</div>
+    </div>
+
+    <!-- Fluxo 4 -->
+    <div class="flow-card onda1">
+      <div class="flow-number" style="color:var(--accent);">Fluxo 4 · Onda 1</div>
+      <div class="flow-name">Gestão administrativa</div>
+      <div class="flow-desc">Backoffice cadastra e gerencia entidades do ecossistema.</div>
+      <div class="flow-systems">
+        <span class="flow-sys">Data Hub</span>
+        <span class="flow-sys">ERP</span>
+      </div>
+      <div class="flow-when">Mar → Abr</div>
+    </div>
+
+    <!-- Fluxo 5 -->
+    <div class="flow-card paralela">
+      <div class="flow-number" style="color:var(--yellow);">Fluxo 5 · Paralela</div>
+      <div class="flow-name">Gestão financeira</div>
+      <div class="flow-desc">Consolidação financeira, contas a pagar e fiscal migram do MGF para o SANKHYA.</div>
+      <div class="flow-systems">
+        <span class="flow-sys">SANKHYA</span>
+        <span class="flow-sys">Data Hub</span>
+      </div>
+      <div class="flow-when">Mar → Abr</div>
+    </div>
+
+    <!-- Fluxo 6 -->
+    <div class="flow-card paralela">
+      <div class="flow-number" style="color:var(--yellow);">Fluxo 6 · Paralela</div>
+      <div class="flow-name">Rastreamento</div>
+      <div class="flow-desc">Associado contrata → rastreador é instalado → veículo é monitorado.</div>
+      <div class="flow-systems">
+        <span class="flow-sys">Gestão de Rastreadores</span>
+        <span class="flow-sys">Lógica</span>
+        <span class="flow-sys">Data Hub</span>
+      </div>
+      <div class="flow-when">Mar → Abr</div>
+    </div>
+
+    <!-- Fluxo 7 -->
+    <div class="flow-card paralela">
+      <div class="flow-number" style="color:var(--yellow);">Fluxo 7 · Paralela</div>
+      <div class="flow-name">Atendimento</div>
+      <div class="flow-desc">Atendimentos ao associado e consultor via telas de serviço, substituindo fluxos manuais via chat.</div>
+      <div class="flow-systems">
+        <span class="flow-sys">Atend. Automatizado</span>
+        <span class="flow-sys">Data Hub</span>
+        <span class="flow-sys">ezchat</span>
+      </div>
+      <div class="flow-when">Mar → Abr (MVP)</div>
+    </div>
+
+    <!-- Fluxo 8 -->
+    <div class="flow-card paralela">
+      <div class="flow-number" style="color:var(--yellow);">Fluxo 8 · Paralela</div>
+      <div class="flow-name">App do Associado</div>
+      <div class="flow-desc">Vida do associado a 1 clique — consulta de boletos, dados do veículo e serviços pelo app.</div>
+      <div class="flow-systems">
+        <span class="flow-sys">App Associado</span>
+        <span class="flow-sys">Data Hub</span>
+      </div>
+      <div class="flow-when">Abr</div>
+    </div>
+
+    <!-- Fluxo 9 -->
+    <div class="flow-card onda2">
+      <div class="flow-number" style="color:var(--purple);">Fluxo 9 · Onda 2</div>
+      <div class="flow-name">Eventos</div>
+      <div class="flow-desc">Substituir SIGA (Arco). Workflow próprio de eventos + integração com Cilia para orçamentos e oficinas.</div>
+      <div class="flow-systems">
+        <span class="flow-sys">Workflow de Eventos</span>
+        <span class="flow-sys">Cilia</span>
+        <span class="flow-sys">Data Hub</span>
+        <span class="flow-sys">Abertura de Eventos</span>
+      </div>
+      <div class="flow-when">Jul → Ago</div>
+    </div>
+  </div>
+</section>
+
+<!-- ONDAS -->
+<section id="ondas">
+  <h2>Ondas de Entrega</h2>
+
+  <!-- ONDA 1 -->
+  <div class="wave-section">
+    <div class="wave-header">
+      <div class="wave-badge" style="background:var(--blue-bg);color:var(--accent);">ONDA 1</div>
+      <div>
+        <div class="wave-title">Go-live — Mar a Mai 2026</div>
+        <div class="wave-sub">Fluxos críticos. Sem eles, o ecossistema próprio não opera.</div>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Sistema</th><th>Legado</th><th>Estratégia</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Data Hub</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢 Desenvolver próprio</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+        </tr>
+        <tr>
+          <td><strong>ERP</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>SGA (Hinova)</td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+        </tr>
+        <tr>
+          <td><strong>CRM</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>Power CRM (Hinova)</td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+        </tr>
+        <tr>
+          <td><strong>Vistoria</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Própria)</span></td>
+          <td>Visto (Hinova)</td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
+        </tr>
+        <tr>
+          <td><strong>Gestão de Boletos</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>—</td>
+          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
+        </tr>
+        <tr>
+          <td><strong>ETL</strong></td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢 Desenvolver próprio</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LANES PARALELAS -->
+  <div class="wave-section">
+    <div class="wave-header">
+      <div class="wave-badge" style="background:var(--yellow-bg);color:var(--yellow);">PARALELAS</div>
+      <div>
+        <div class="wave-title">Lanes paralelas — até Abr 2026</div>
+        <div class="wave-sub">Máximo 20% da capacidade. Se a Onda 1 estiver em risco, pausam.</div>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Sistema</th><th>Legado</th><th>Estratégia</th><th>Status</th><th>Deadline</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>SANKHYA</strong></td>
+          <td>MGF</td>
+          <td><span class="badge badge-blue">🔵 Terceiro contratado</span></td>
+          <td><span class="status-dot dot-impl"></span> Implantação</td>
+          <td>Abr 2026</td>
+        </tr>
+        <tr>
+          <td><strong>Gestão de Rastreadores</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>SGR (Hinova)</td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+          <td>Abr 2026</td>
+        </tr>
+        <tr>
+          <td><strong>Lógica</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Hinova)</span></td>
+          <td>—</td>
+          <td><span class="badge badge-gray">⚪ Manter integrado</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Atend. Automatizado</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>—</td>
+          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
+          <td><span class="status-dot dot-dev"></span> Desenvolvimento</td>
+          <td>Abr 2026 (MVP)</td>
+        </tr>
+        <tr>
+          <td><strong>App Associado</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢 Desenvolver próprio</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
+          <td>Abr 2026</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ONDA 2 -->
+  <div class="wave-section">
+    <div class="wave-header">
+      <div class="wave-badge" style="background:var(--purple-bg);color:var(--purple);">ONDA 2</div>
+      <div>
+        <div class="wave-title">Pós go-live — Jun a Ago 2026</div>
+        <div class="wave-sub">Só começam após o go-live de Maio, salvo trade-off com a diretoria ou metas superadas.</div>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Sistema</th><th>Legado</th><th>Estratégia</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Workflow de Eventos</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>SIGA (Arco)</td>
+          <td><span class="badge badge-red">🔴 Substituir</span></td>
+          <td><span class="status-dot dot-wait"></span> Aguardando</td>
+        </tr>
+        <tr>
+          <td><strong>Abertura de Eventos</strong> <span style="color:var(--text-muted);font-size:.75rem;">(Próprio)</span></td>
+          <td>—</td>
+          <td><span class="badge badge-yellow">🟡 Gargalo → módulo</span></td>
+          <td><span class="status-dot dot-prod"></span> Produção</td>
+        </tr>
+        <tr>
+          <td><strong>Cilia</strong></td>
+          <td>—</td>
+          <td><span class="badge badge-gray">⚪ Manter integrado</span></td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TIMELINE VISUAL -->
+<section id="timeline">
+  <h2>Timeline Visual</h2>
+  <p class="subtitle">Visão completa das entregas de Março a Agosto de 2026.</p>
+
+  <div class="gantt-wrap">
+    <div class="gantt">
+      <!-- Header -->
+      <div class="gantt-month"></div>
+      <div class="gantt-month">Mar</div>
+      <div class="gantt-month">Abr</div>
+      <div class="gantt-month">Mai</div>
+      <div class="gantt-month">Jun</div>
+      <div class="gantt-month">Jul</div>
+      <div class="gantt-month">Ago</div>
+
+      <!-- ONDA 1 separator -->
+      <div class="gantt-separator">⚡ Onda 1 — Go-live</div>
+
+      <!-- Fluxo 1 -->
+      <div class="gantt-row-label">F1 · Núcleo de dados</div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--accent);">Mapeamento</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--accent);">Sync staging</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--accent);">Virada</div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+
+      <!-- Fluxo 2 -->
+      <div class="gantt-row-label">F2 · Adesão</div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--accent);">Build</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--accent);">Integração</div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+
+      <!-- Fluxo 3 -->
+      <div class="gantt-row-label">F3 · Cobrança</div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--accent);">Build</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--accent);">Homologação</div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+
+      <!-- Fluxo 4 -->
+      <div class="gantt-row-label">F4 · Administrativo</div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--accent);">Build</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--accent);">Integração</div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+
+      <!-- GO-LIVE marker -->
+      <div class="gantt-row-label" style="color:var(--green);font-weight:700;">🚀 GO-LIVE</div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--green);">GO-LIVE</div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+
+      <!-- PARALELAS separator -->
+      <div class="gantt-separator">🔀 Lanes paralelas — 20% capacidade</div>
+
+      <!-- Fluxo 5 -->
+      <div class="gantt-row-label">F5 · Gestão financeira</div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--yellow);color:#000;">Parametrização</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--yellow);color:#000;">Go-live</div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+
+      <!-- Fluxo 6 -->
+      <div class="gantt-row-label">F6 · Rastreamento</div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--yellow);color:#000;">Build</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--yellow);color:#000;">Integração</div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+
+      <!-- Fluxo 7 -->
+      <div class="gantt-row-label">F7 · Atendimento</div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--yellow);color:#000;">MVP</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--yellow);color:#000;">Integração</div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+
+      <!-- Fluxo 8 -->
+      <div class="gantt-row-label">F8 · App Associado</div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--yellow);color:#000;">Redirect</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--yellow);color:#000;">APIs</div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+
+      <!-- ONDA 2 separator -->
+      <div class="gantt-separator">🌊 Onda 2 — Pós go-live</div>
+
+      <!-- Fluxo 9 -->
+      <div class="gantt-row-label">F9 · Eventos</div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar gantt-bar-empty"></div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--purple);">Levantamento</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--purple);">Build</div></div>
+      <div class="gantt-cell"><div class="gantt-bar" style="background:var(--purple);">Go-live</div></div>
+    </div>
+  </div>
+
+  <div class="golden-rule">
+    <p>Se a Onda 1 estiver em risco, as lanes paralelas pausam.</p>
+    <p class="sub">O go-live de Maio é inegociável. As lanes paralelas são oportunísticas — só rodam se houver capacidade sobrando.</p>
+  </div>
+
+  <div class="golden-rule" style="margin-top:1rem;background:linear-gradient(135deg, rgba(177,151,252,.1), rgba(108,140,255,.1));border-color:var(--purple);">
+    <p>Iniciar Eventos antes do go-live da Onda 1 compromete o prazo de Maio.</p>
+    <p class="sub">Este fluxo só deve começar após a conclusão da Onda 1. Pode ser antecipado como lane paralela caso o time supere as metas, ou mediante trade-off aprovado pela diretoria.</p>
+  </div>
+</section>
+
+<!-- MARCOS -->
+<section id="marcos">
+  <h2>Marcos</h2>
+  <p class="subtitle">O que precisa estar pronto a cada mês.</p>
+
+  <!-- Março -->
+  <div class="milestone">
+    <div class="milestone-header">
+      <div class="milestone-month" style="background:var(--blue-bg);color:var(--accent);">MAR</div>
+      <div class="milestone-title">Fundação</div>
+    </div>
+    <div class="milestone-items">
+      <div class="milestone-item"><span class="check">○</span> Data Hub operando — Postgres + API Gateway + Auth JWT</div>
+      <div class="milestone-item"><span class="check">○</span> Entidades base no CRUD — Empresa, Regional, Cidade, Consultor, Equipe, Tabela de Preço</div>
+      <div class="milestone-item"><span class="check">○</span> Entidades de cadastro — Associado, Veículo, Plano, Serviço, Beneficiário, Boleto</div>
+      <div class="milestone-item"><span class="check">○</span> CRM V1 funcional — Funil de vendas completo</div>
+      <div class="milestone-item"><span class="check">○</span> Tabelas de preço — Regionais, planos, serviços cadastráveis</div>
+      <div class="milestone-item"><span class="check">○</span> Perfis e usuários — Vendas e Administrativo com permissões</div>
+      <div class="milestone-item"><span class="check">○</span> ETL mapeado — Campos SGA → núcleo, estratégia de sync definida</div>
+    </div>
+  </div>
+
+  <!-- Abril -->
+  <div class="milestone">
+    <div class="milestone-header">
+      <div class="milestone-month" style="background:var(--yellow-bg);color:var(--yellow);">ABR</div>
+      <div class="milestone-title">Integração & Homologação</div>
+    </div>
+    <div class="milestone-items">
+      <div class="milestone-item"><span class="check">○</span> CRM integrado ao Data Hub</div>
+      <div class="milestone-item"><span class="check">○</span> Boletos integrados ao Data Hub — geração, listagem, envio</div>
+      <div class="milestone-item"><span class="check">○</span> ERP com telas integradas às APIs reais</div>
+      <div class="milestone-item"><span class="check">○</span> ETL sync contínuo rodando em staging</div>
+      <div class="milestone-item"><span class="check">○</span> Sistemas leitores migrados para BD próprio</div>
+      <div class="milestone-item"><span class="check">○</span> Vistoria integrada ao CRM e Data Hub</div>
+      <div class="milestone-item"><span class="check">○</span> Homologação comercial — CRM validado</div>
+      <div class="milestone-item"><span class="check">○</span> Homologação financeira — Boletos validados</div>
+      <div class="milestone-item"><span class="check">○</span> Fluxo de dados com terceiros mapeado</div>
+      <div class="milestone-item"><span class="check">○</span> Plano B para terceiros sem API definido</div>
+      <div class="milestone-item"><span class="check">○</span> Checklist de go-live pronto</div>
+    </div>
+  </div>
+
+  <!-- Maio -->
+  <div class="milestone">
+    <div class="milestone-header">
+      <div class="milestone-month" style="background:var(--green-bg);color:var(--green);">MAI</div>
+      <div class="milestone-title">Go-live</div>
+    </div>
+    <div class="milestone-items">
+      <div class="milestone-item"><span class="check">○</span> Carga final + reconciliação financeira</div>
+      <div class="milestone-item"><span class="check">○</span> SGA em somente-leitura</div>
+      <div class="milestone-item"><span class="check">○</span> Go-live CRM + Vistoria — Power CRM e Visto desligados</div>
+      <div class="milestone-item"><span class="check">○</span> Go-live Boletos — módulo SGA desligado</div>
+      <div class="milestone-item"><span class="check">○</span> Go-live ERP — telas administrativas substituídas</div>
+      <div class="milestone-item"><span class="check">○</span> Integrações com fornecedores — Regalias e ClubGas via Data Hub</div>
+      <div class="milestone-item"><span class="check">○</span> Estabilização — suporte pós go-live, plantão</div>
+    </div>
+  </div>
+</section>
+
+<!-- GO-LIVE -->
+<section id="golive">
+  <h2>Condições de Go-live</h2>
+  <p class="subtitle">O go-live só acontece se TODAS estas condições forem atendidas.</p>
+  <div class="golive-grid">
+    <div class="golive-item"><div class="golive-check"></div> Núcleo com todos os CRUDs estáveis e auth funcionando</div>
+    <div class="golive-item"><div class="golive-check"></div> CRM validado pelo time comercial</div>
+    <div class="golive-item"><div class="golive-check"></div> Vistoria integrada ao CRM e Data Hub</div>
+    <div class="golive-item"><div class="golive-check"></div> Boletos homologados com integração SICOOB</div>
+    <div class="golive-item"><div class="golive-check"></div> ETL sync contínuo estável (>95% aderência)</div>
+    <div class="golive-item"><div class="golive-check"></div> Sistemas leitores no BD próprio</div>
+    <div class="golive-item"><div class="golive-check"></div> Módulo Admin (ERP) com fluxos críticos</div>
+    <div class="golive-item"><div class="golive-check"></div> Fornecedores (Regalias, ClubGas) via Data Hub</div>
+    <div class="golive-item"><div class="golive-check" style="border-color:var(--red);"></div> <strong>Nenhuma demanda extra entrou no escopo</strong></div>
+  </div>
+</section>
+
+<!-- RISCOS -->
+<section id="riscos">
+  <h2>Riscos & Bloqueadores</h2>
+  <div class="blocker-list">
+    <div class="blocker">
+      <div class="blocker-icon">⚠</div>
+      <div>
+        <div class="blocker-title">Instabilidade do SGA</div>
+        <div class="blocker-desc">Operação para quando SGA cai. Mitiga com ETL sync contínuo — migrar leituras para BD próprio o mais cedo possível.</div>
+      </div>
+    </div>
+    <div class="blocker">
+      <div class="blocker-icon">⚠</div>
+      <div>
+        <div class="blocker-title">Data Hub atrasar</div>
+        <div class="blocker-desc">Bloqueia todos os fluxos. Proteger o time de interrupções em Março.</div>
+      </div>
+    </div>
+    <div class="blocker">
+      <div class="blocker-icon">⚠</div>
+      <div>
+        <div class="blocker-title">Integração bancária SICOOB</div>
+        <div class="blocker-desc">Boletos dependem da integração funcionar. Priorizar integração com API SICOOB.</div>
+      </div>
+    </div>
+    <div class="blocker">
+      <div class="blocker-icon">⚠</div>
+      <div>
+        <div class="blocker-title">ETL com dados inconsistentes</div>
+        <div class="blocker-desc">Migração falha. Validação contínua em staging.</div>
+      </div>
+    </div>
+    <div class="blocker">
+      <div class="blocker-icon">⚠</div>
+      <div>
+        <div class="blocker-title">Escopo crescer</div>
+        <div class="blocker-desc">Go-live de Maio inviável. Congelar escopo — usar framework de negociação com a diretoria.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section id="equipe">
+  <h2>Equipe</h2>
+  <p class="subtitle">Time de produto sem silos — qualquer dev pode atuar em qualquer parte do ecossistema.</p>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">R</div>
+      <div class="team-name">Ramon</div>
+      <div class="team-role">PO</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">L</div>
+      <div class="team-name">Lívia</div>
+      <div class="team-role">Analista de Requisitos</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="color:var(--green);">R</div>
+      <div class="team-name">Ricardo</div>
+      <div class="team-role">Full-stack · Arquiteto</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">K</div>
+      <div class="team-name">Kelvy</div>
+      <div class="team-role">Full-stack · Code Review</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">G</div>
+      <div class="team-name">Guilherme</div>
+      <div class="team-role">Full-stack</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">A</div>
+      <div class="team-name">Alex</div>
+      <div class="team-role">Full-stack</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">O</div>
+      <div class="team-name">Otávio</div>
+      <div class="team-role">Full-stack</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">G</div>
+      <div class="team-name">Gustavo</div>
+      <div class="team-role">Full-stack</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <h3>Code Review</h3>
+    <div class="card-grid" style="grid-template-columns:repeat(3,1fr);margin-top:.75rem;">
+      <div class="card" style="border-left:3px solid var(--red);">
+        <div class="card-title" style="font-size:.85rem;">PR Crítico</div>
+        <div class="card-body"><p>API, banco, auth, integração</p><p style="color:var(--text);font-weight:600;">Ricardo obrigatório</p></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--yellow);">
+        <div class="card-title" style="font-size:.85rem;">PR Normal</div>
+        <div class="card-body"><p>Feature, tela, ajuste</p><p style="color:var(--text);font-weight:600;">Ricardo ou Kelvy</p></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--green);">
+        <div class="card-title" style="font-size:.85rem;">Hotfix</div>
+        <div class="card-body"><p>Bug em produção</p><p style="color:var(--text);font-weight:600;">Quem estiver disponível</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.75rem;border-top:1px solid var(--border);">
+  Top Brasil Proteção Veicular — Blueprint v1.5 · Março 2026
+</footer>
+
+<script>
+// Active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav .nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+</body>
+</html>
